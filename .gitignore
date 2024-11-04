@@ -1,6 +1,9 @@
 .vscode
 docs/source/tutorial/database
 docs/source/tutorial/figure.svg
+input.svg
+output.png
+input.svg
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -162,5 +165,4 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
-input.svg
-output.png
+
