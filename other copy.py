@@ -240,9 +240,7 @@ hexane = unifac.get_groups("n-hexane")
 
 #print(hexane.subgroups)
 #print(hexane.get_solution_svg())
-svg_string = hexane.get_solution_svg()
-with open("input.svg", "w") as file:
-    file.write(svg_string)
+
 
 
 c_script_path = "SvgToPng.c"
@@ -250,5 +248,5 @@ output_path = "SvgToPng"
 output = run_c_script(c_script_path, output_path)
 
 # Example usage
-#svg_string = hexane.get_solution_svg()
+svg_string = hexane.get_solution_svg()
 #svg_to_png(svg_string, "outputpy.png")
