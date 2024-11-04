@@ -7,6 +7,7 @@ from ugropy import DefaultSolver
 from rdkit.Chem import Draw
 from IPython.display import SVG
 import subprocess
+import os
 
 #------------------------------------------------------------
 
@@ -85,7 +86,8 @@ while True:
         with open("input.svg", "w") as file:
             file.write(svg_string)
         
-        run_c_script("SvgToPng.c", "SvgToPng")
+        if not os.path.exists("SvgToPng.exe"):
+            run_c_script("SvgToPng.c", "SvgToPng")
         window_picture("The molecule groups are displayed below.")
         print(molecule.unifac.subgroups)
 
