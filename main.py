@@ -12,11 +12,40 @@ import subprocess
 
 def get_molecule_name():
     root = tk.Tk()
+    root.title(title)
     root.withdraw()  # Hide the main window
     molecule_name = simpledialog.askstring("Input", "Please enter the molecule name:")
     center_window(root)
     root.destroy()
     return molecule_name
+
+def window_message(message):
+    window = tk.Tk()
+    window.title(title)
+    label = tk.Label(window, text="\n"+message+"\n")
+    #image = tk.PhotoImage(file="./output.png")
+    #image_label = tk.Label(window, image=image)
+    #image_label.pack()
+    label.pack()
+    close_button = tk.Button(window, text="Close", command=window.destroy)
+    close_button.pack()
+    center_window(window)
+    window.mainloop()
+
+def window_picture(message):
+    window = tk.Tk()
+    window.title(title)
+    label = tk.Label(window, text="\n"+message+"\n")
+    label.pack()
+    label = tk.Label(window, text=molecule.unifac.subgroups)
+    image = tk.PhotoImage(file="./output.png")
+    image_label = tk.Label(window, image=image)
+    image_label.pack()
+    label.pack()
+    close_button = tk.Button(window, text="Close", command=window.destroy)
+    close_button.pack()
+    center_window(window)
+    window.mainloop()
 
 def center_window(window):
     window.update_idletasks()
@@ -25,6 +54,7 @@ def center_window(window):
     x = (window.winfo_screenwidth() // 2) - (width // 2)
     y = (window.winfo_screenheight() // 2) - (height // 2)
     window.geometry(f'{width}x{height}+{x}+{y}')
+    return None
 
 def run_c_script(c_script_path: str, output_path: str):
     # Compile the C script
@@ -38,40 +68,31 @@ def run_c_script(c_script_path: str, output_path: str):
     return run_process.stdout
 
 #------------------------------------------------------------
+title = "UGROpyGUI"
 
-molecule_name = get_molecule_name()
+while True:
+    molecule_name = get_molecule_name()
 
-    
-if molecule_name:
-    try:
-        molecule_groups = unifac.get_groups(molecule_name)
-    except:
-        print("Invalid molecule name.")
+    if molecule_name:
+        try:
+            molecule = Groups(molecule_name)
+            molecule_groups = unifac.get_groups(molecule_name)
+        except:
+            print("Invalid molecule name.")
+            window_message("Invalid molecule name.")
+            continue
+        svg_string = molecule_groups.get_solution_svg()
+        with open("input.svg", "w") as file:
+            file.write(svg_string)
+        
+        run_c_script("SvgToPng.c", "SvgToPng")
+        window_picture("The molecule groups are displayed below.")
+        print(molecule.unifac.subgroups)
+
+
+    else:
+        print("No molecule name provided.")
         exit()
-    svg_string = molecule_groups.get_solution_svg()
-    with open("input.svg", "w") as file:
-        file.write(svg_string)
-    molecule = Groups(molecule_name)
-    c_script_path = "SvgToPng.c"
-    output_path = "SvgToPng"
-    output = run_c_script(c_script_path, output_path)
-
-    goodbye_window = tk.Tk()
-    goodbye_label = tk.Label(goodbye_window, text=molecule.unifac.subgroups)
-    image = tk.PhotoImage(file="./output.png")
-    image_label = tk.Label(goodbye_window, image=image)
-    image_label.pack()
-    goodbye_label.pack()
-    close_button = tk.Button(goodbye_window, text="Close", command=goodbye_window.destroy)
-    close_button.pack()
-    center_window(goodbye_window)
-    goodbye_window.mainloop()
-    print(molecule.unifac.subgroups)
-
-
-else:
-    print("No molecule name provided.")
-
 
 
 
