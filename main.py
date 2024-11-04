@@ -58,10 +58,10 @@ def center_window(window):
     return None
 
 def run_c_script(c_script_path: str, output_path: str):
-    # Compile the C script
-    compile_command = f"gcc {c_script_path} -o {output_path}"
-    compile_process = subprocess.run(compile_command, shell=True, check=True)
-    
+    if not os.path.exists("SvgToPng.exe"):  
+        # Compile the C script
+        compile_command = f"gcc {c_script_path} -o {output_path}"
+        compile_process = subprocess.run(compile_command, shell=True, check=True)
     # Run the compiled C script
     run_command = f"./{output_path}"
     #run_process = subprocess.run(run_command, shell=True, check=True, capture_output=True, text=True)
@@ -86,8 +86,7 @@ while True:
         with open("input.svg", "w") as file:
             file.write(svg_string)
         
-        if not os.path.exists("SvgToPng.exe"):
-            run_c_script("SvgToPng.c", "SvgToPng")
+        run_c_script("SvgToPng.c", "SvgToPng")
         window_picture("The molecule groups are displayed below.")
         print(molecule.unifac.subgroups)
 
