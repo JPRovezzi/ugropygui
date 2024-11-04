@@ -8,6 +8,7 @@ from rdkit.Chem import Draw
 from IPython.display import SVG
 import subprocess
 import os
+from PIL import Image, ImageDraw, ImageFont
 
 #------------------------------------------------------------
 
@@ -68,6 +69,30 @@ def run_c_script(c_script_path: str, output_path: str):
     run_process = subprocess.run(run_command)
     return run_process.stdout
 
+def writeInPicture(dict):
+    # Load the image
+    image = Image.open('output.png')
+    print("picture loaded")
+    # Initialize ImageDraw
+    draw = ImageDraw.Draw(image)
+
+    # Define the text and position
+    #text = list(dict.keys())[0]
+    position = (25, 10)
+
+    # Load a font
+    font = ImageFont.load_default()
+
+    # Add text to image
+    for i, key in enumerate(dict.keys()):
+        position = (25, 10 + i * 25)  # Adjust the position for each key
+        draw.text(position, key, font=font, fill=(0, 0, 0))
+    #draw.text(position, text, font=font, fill=(0, 0, 0))
+
+    # Save the image
+    image.save('output.png')
+    return None
+
 #------------------------------------------------------------
 title = "UGROpyGUI"
 
@@ -87,6 +112,7 @@ while True:
             file.write(svg_string)
         
         run_c_script("SvgToPng.c", "SvgToPng")
+        writeInPicture(molecule.unifac.subgroups)
         window_picture("The molecule groups are displayed below.")
         print(molecule.unifac.subgroups)
 
