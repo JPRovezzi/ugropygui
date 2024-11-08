@@ -1,6 +1,7 @@
 import tkinter as tk
 import modules.guiFrames.functions as functions
 import modules.guiFrames.frameRoot as frameRoot
+import modules.imageHandler as imageHandler
 
 def load():
         save_window = tk.Toplevel(frameRoot.root)
@@ -12,10 +13,7 @@ def load():
         
         # Display the output PNG as a widget
         
-        img = tk.PhotoImage(file="output.png")
-        img_label = tk.Label(save_window, image=img)
-        img_label.image = img  # Keep a reference to avoid garbage collection
-        img_label.pack(pady=10)
+        imageHandler.insert_image(save_window, "output.png")
         
         # Entry box to write the path to save
         #tk.Label(save_window, text="Save Path:").pack(pady=5)
