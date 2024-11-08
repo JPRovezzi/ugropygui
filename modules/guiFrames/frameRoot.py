@@ -14,15 +14,8 @@
 import tkinter as tk
 # Configparser is used to read configuration files.
 import configparser
-# SvgHandler is a module that provides functions to handle SVG files.
-import modules.svgHandler as svgHandler
-# The PIL library is used to work with images.
-from PIL import ImageTk
-# ImageHandler is a module that provides functions to handle images.
-import modules.imageHandler as imageHandler
-# widgetClasses is a module that provides classes for GUI widgets.
-import modules.widgetClasses as widgetClasses
-#
+
+# frameWelcome is a module that provides functions to create and manage the welcome frame of the GUI.
 import modules.guiFrames.frameWelcome as frameWelcome
 
 #------------------------------------------------------------
