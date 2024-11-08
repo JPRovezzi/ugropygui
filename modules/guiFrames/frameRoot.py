@@ -18,6 +18,8 @@ import configparser
 # frameWelcome is a module that provides functions to create and manage the welcome frame of the GUI.
 import modules.guiFrames.frameWelcome as frameWelcome
 
+import modules.guiFrames.frameSavePicture as frameSavePicture
+
 #------------------------------------------------------------
 # Read configuration file
 config = configparser.ConfigParser()
@@ -41,6 +43,23 @@ def create_gui():
     root.resizable(0, 0)  # Disable resizing
     root.eval("tk::PlaceWindow . center")
 
+    # Create a menu bar
+    menu_bar = tk.Menu(root)
+    
+    # Create a file menu
+    file_menu = tk.Menu(menu_bar, tearoff=0)
+    file_menu.add_command(label="Save last picture", command=lambda: frameSavePicture.load())
+    file_menu.add_separator()
+    file_menu.add_command(label="Exit", command=root.quit)
+    menu_bar.add_cascade(label="File", menu=file_menu)
+    # Create an options menu
+    options_menu = tk.Menu(menu_bar, tearoff=0)
+    options_menu.add_command(label="Preferences", command=lambda: print("Option 1 selected"))
+    menu_bar.add_cascade(label="Settings", menu=options_menu)
+    # Add the menu bar to the root window
+    root.config(menu=menu_bar)
+
+    # Create frames
     frame_welcome = tk.Frame(root, width=640, height=480, bg=bg_color)
     frame_selection = tk.Frame(root, width=640, height=480, bg=bg_color)
     frame_getName = tk.Frame(root, width=640, height=480, bg=bg_color)
@@ -52,7 +71,10 @@ def create_gui():
         frame.grid_columnconfigure(0, weight=1)
         frame.grid(row=0, column=0, sticky="nesw")
 
+    #Load the welcome frame
     frameWelcome.load()
+
+    # Start the main loop
     root.mainloop()
     return None
 
