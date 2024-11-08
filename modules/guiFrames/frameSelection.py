@@ -15,11 +15,15 @@ import modules.svgHandler as svgHandler
 
 # widgetClasses is a module that provides classes for GUI widgets.
 import modules.widgetClasses as widgetClasses
-#
-import modules.guiFrames.frameResult as frameResult
-import modules.guiFrames.functions as functions
-import modules.guiFrames.frameWelcome as frameWelcome
+# FrameRoot is a module that provides functions the root frame of the GUI.
 import modules.guiFrames.frameRoot as frameRoot
+# Functions is a module that provides common functions to create and manage the GUI.
+import modules.guiFrames.functions as functions
+# frameResult is a module that provides functions to create and manage the result frame of the GUI.
+import modules.guiFrames.frameResult as frameResult
+# frameWelcome is a module that provides functions to create and manage the welcome frame of the GUI.
+import modules.guiFrames.frameWelcome as frameWelcome
+
 
 #------------------------------------------------------------
 # Read configuration file

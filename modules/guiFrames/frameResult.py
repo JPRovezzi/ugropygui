@@ -15,10 +15,14 @@ import configparser
 import modules.imageHandler as imageHandler
 # widgetClasses is a module that provides classes for GUI widgets.
 import modules.widgetClasses as widgetClasses
-#
+# FrameRoot is a module that provides functions the root frame of the GUI.
 import modules.guiFrames.frameRoot as frameRoot
-import modules.guiFrames.frameWelcome as frameWelcome
+# Functions is a module that provides common functions to create and manage the GUI.
 import modules.guiFrames.functions as functions
+# frameWelcome is a module that provides functions to create and manage the welcome frame of the GUI.
+import modules.guiFrames.frameWelcome as frameWelcome
+
+
 
 #------------------------------------------------------------
 # Read configuration file

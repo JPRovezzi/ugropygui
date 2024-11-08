@@ -66,7 +66,7 @@ def get_results(molecule_id,input_type):
                     )
             except:
                 error = 1
-                print(1)
+                #print(1)
                 outcome = (None, error)
                 return outcome
             svg_string = molecule_groups.get_solution_svg() # Get the SVG information
@@ -76,11 +76,11 @@ def get_results(molecule_id,input_type):
             write_groups2picture(molecule.unifac.subgroups) # Write the molecule groups in the picture
             #print("The molecule groups are displayed below.")
             error = None
-            print(0)
+            #print(0)
             outcome = (molecule, error)
             return outcome
     else:
         error = 2
-        print(2)
+        #print(2)
         outcome = (None,error)
         return outcome

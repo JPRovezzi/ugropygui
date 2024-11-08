@@ -12,13 +12,15 @@ import tkinter as tk
 # widgetClasses is a module that provides classes for GUI widgets.
 import modules.widgetClasses as widgetClasses
 
-#
+# frameRoot is a module that provides functions the root frame of the GUI.
 import modules.guiFrames.frameRoot as frameRoot
+# frameSelection is a module that provides functions to create and manage the selection frame of the GUI.
 import modules.guiFrames.frameSelection as frameSelection
-
+# functions is a module that provides common functions to create and manage the GUI.
+import modules.guiFrames.functions as functions
 
 #------------------------------------------------------------
-import modules.guiFrames.functions as functions
+
 
 def load():
     functions.clear_widgets_except(frameRoot.frameWelcome,frameRoot.frames)
